@@ -1,30 +1,28 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-  //grab all the necessary DOM elements
+  // your code here
 
-  //form and relevant input fields
-  const newTaskForm = document.getElementById("create-task-form");
-  const newTaskDescription = document.getElementById("new-task-description");
-  const newTaskPriority = document.getElementById("new-task-priority");
-
-  //ul where new tasks will live on the DOM
-  const newTaskUl = document.getElementById("tasks");
-
-  //attach event listeners
-  newTaskForm.addEventListener("submit", createNewTask);
+let text = document.querySelector('input')
+let form = document.querySelector('form')
+form.addEventListener('submit', (e) =>{
+  e.preventDefault()
+  addTodo(e.target['new-task-description'].value)
+  form.reset()
+})
 });
 
-const createNewTask = event => {
-  event.preventDefault();
-  //stop form from trying to submit
-  const newTaskDescription = document.getElementById("new-task-description");
-  const newTask = document.createElement("li");
-  newTask.innerText = newTaskDescription.value;
+function addTodo(updatelist){
+let li = document.createElement('li')
+let btn = document.createElement('button')
+btn.textContent = 'delete'
+btn.addEventListener('click', deleteList)
+li.textContent = `${updatelist}  `
+document.querySelector('#list').appendChild(li)
+li.appendChild(btn)
 
-  appendNewTask(newTask);
-  event.target.reset();
-};
+}
 
-const appendNewTask = task => {
-  document.getElementById("tasks").appendChild(task);
-};
+function deleteList(e){
+e.target.parentNode.remove()
+}
+
+
